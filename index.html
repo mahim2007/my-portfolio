@@ -1,0 +1,419 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NLGGLY0CKD"></script>  
+<script>  
+  window.dataLayer = window.dataLayer || [];  
+  function gtag(){dataLayer.push(arguments);}  
+  gtag('js', new Date());  
+  gtag('config', 'G-NLGGLY0CKD');  
+</script>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#020617">
+
+<title>Md Mahim | Portfolio</title>  
+<meta name="description" content="Explore the portfolio of Md Mahim, a Graphic Designer and Front-End Web Developer. Discover modern UI/UX designs, branding, and various digital projects.">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">  
+
+  <meta property="og:title" content="Md Mahim | Portfolio">  
+  <meta property="og:description" content="Aspiring Tech Enthusiast. Learning Today, Building Tomorrow.">  
+  <meta property="og:image" content="https://mahim.bro.bd/og-image.jpg">  
+  <meta property="og:url" content="https://mahim.bro.bd/">  
+  <meta property="og:type" content="website">  
+  <meta name="twitter:card" content="summary_large_image">  
+  <meta property="fb:app_id" content="959403313337528">
+  
+  <meta itemprop="image" content="https://mahim.bro.bd/mahim-photo.webp">
+  <link rel="image_src" href="https://mahim.bro.bd/mahim-photo.webp">
+  <meta name="thumbnail" content="https://mahim.bro.bd/mahim-photo.webp">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Md Mahim",
+      "image": "https://mahim.bro.bd/mahim-photo.webp",
+      "jobTitle": "Graphic Designer",
+      "url": "https://mahim.bro.bd"
+    }
+  }
+  </script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("Xyl9UEoJBNOUzLXMe");
+})();
+</script>
+</head>  
+<body>  
+
+<div class="menu-overlay-bg" id="menuOverlay" onclick="toggleMenu()"></div>
+
+<div id="particles-js"></div>
+
+<div class="cursor-follower" id="cursor"></div>
+
+<div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+  <i id="theme-icon" class="fas fa-sun"></i>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">  
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <line x1="4" y1="8" x2="20" y2="8"></line>
+    <line x1="4" y1="16" x2="13" y2="16"></line>
+  </svg>  
+</div>  
+
+<div class="side-menu" id="menu">  
+  <div class="menu-profile">
+      <img src="mahim-photo.webp" alt="Md Mahim">
+      <h3>MD MAHIM</h3>
+      <p>Graphic Designer</p>
+  </div>
+
+  <div class="menu-links">
+      <a href="#about" class="nav-link" onclick="toggleMenu()"><i class="fas fa-user"></i> &nbsp; About</a>  
+      <a href="#education" class="nav-link" onclick="toggleMenu()"><i class="fas fa-graduation-cap"></i> &nbsp; Education</a>  
+      <a href="#skills" class="nav-link" onclick="toggleMenu()"><i class="fas fa-code"></i> &nbsp; Skills</a>  
+      <a href="#projects" class="nav-link" onclick="toggleMenu()"><i class="fas fa-project-diagram"></i> &nbsp; Projects</a>  
+      <a href="#gallery" class="nav-link" onclick="toggleMenu()"><i class="fas fa-images"></i> &nbsp; Gallery</a>
+      <a href="#testimonials" class="nav-link" onclick="toggleMenu()"><i class="fas fa-star"></i> &nbsp; Feedback</a>
+      <a href="#contact-form-section" class="nav-link" onclick="toggleMenu()"><i class="fas fa-phone"></i> &nbsp; Contact</a>  
+      <a href="/cv.pdf" class="nav-link" download style="color: var(--success);"><i class="fas fa-download"></i> &nbsp; Download CV</a>  
+  </div>
+
+  <div class="menu-footer">
+      <div class="menu-socials">
+          <a href="https://www.facebook.com/share/19hVQfbCEq/" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="mailto:contact@mahim.bro.bd"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/8801404950747?text=Hello%20Mahim%2C%20I%20visited%20your%20portfolio" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+  </div>
+</div>  
+
+<div class="container">    
+  <div class="header">  
+    <img src="mahim-photo.webp" class="profile-img" alt="Md Mahim">  
+    <h1>MD MAHIM</h1>  
+    <div class="tagline">  
+        <span id="typing"></span><br>  
+        <span id="typing2" style="font-size: 0.9rem; opacity: 0.8;"></span>  
+    </div>  
+    <div class="icons">  
+      <a href="https://www.facebook.com/share/19hVQfbCEq/" target="_blank"><i class="fab fa-facebook"></i></a>  
+      <a href="mailto:contact@mahim.bro.bd"><i class="fas fa-envelope"></i></a>  
+      <a href="https://wa.me/8801404950747?text=Hello%20Mahim%2C%20I%20visited%20your%20portfolio" target="_blank"><i class="fab fa-whatsapp"></i></a>  
+    </div>
+  </div>    
+  <div class="card reveal" id="about">  
+    <h2>About Me</h2>  
+    <p style="color: var(--text-dim);">  
+      I am a <b>Diploma Engineering student</b> at Rajshahi Polytechnic Institute. Since <b>2022</b>, I have been actively working in the field of <b>Graphic Design</b>. I am deeply fascinated by technology and cybersecurity, focusing on building secure digital solutions and exploring the world of ethical hacking.  
+    </p>  
+    <div style="margin-top: 25px;">
+        <a href="/cv.pdf" download class="btn-cta btn-solid">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+    </div>
+  </div>    
+  <div class="card reveal" id="education">  
+    <h2>Education</h2>  
+    <div class="item-box"><i class="fas fa-school"></i><div><div style="font-weight: bold;">Secondary School Certificate</div><small style="color:var(--text-dim)">Pirganj Pilot High School (2024)</small></div></div>  
+    <div class="item-box"><i class="fas fa-university"></i><div><div style="font-weight: bold;">Diploma in Civil Engineering</div><small style="color:var(--text-dim)">Rajshahi Polytechnic Institute (Ongoing)</small></div></div>  
+  </div>    
+  
+    <div class="card reveal" id="skills">  
+    <h2>My Expertise</h2>  
+    
+    <div id="skills-carousel-container"></div>
+    
+    <div id="raw-skills" style="display: none;">
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-paint-brush"></i> Graphic Design</span>
+          <span>95%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="95%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-shield-alt"></i> Ethical Hacking</span>
+          <span>80%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="80%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-laptop-code"></i> Web Design</span>
+          <span>85%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="85%"></div></div>
+      </div>
+
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-file-word"></i> Office Apps</span>
+          <span>90%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="90%"></div></div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-unlock-alt"></i> Cracker</span>
+          <span>93%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="93%"></div></div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-paper-plane"></i> Spamming</span>
+          <span>80%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="80%"></div></div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-credit-card"></i> Carding</span>
+          <span>97%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="97%"></div></div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-cogs"></i> Reverse Engineering</span>
+          <span>82%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="82%"></div></div>
+      </div>
+      
+      <div class="skill-item">
+        <div class="skill-info">
+          <span><i class="fas fa-bed"></i> Very lazy</span>
+          <span>100%</span>
+        </div>
+        <div class="progress-bar"><div class="progress" data-width="100%"></div></div>
+      </div>
+
+    </div>
+  </div> 
+    
+  
+  <div class="card reveal" id="projects">  
+    <h2>Projects</h2>  
+
+<div class="item-box project-box" style="margin-bottom: 20px;" onclick="openModal('fa-shopping-cart', 'Pro Members Zone', 'A reliable platform where I sell various types of digital <b>Premium Subscriptions</b> at affordable prices.', 'https://www.facebook.com/profile.php?id=61584483207773')">  
+    <div class="project-box-header">
+        <h3><i class="fas fa-shopping-cart"></i> Pro Members Zone</h3>
+        <div class="click-icon-wrapper"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top: 5px;">A reliable platform where I sell various types of digital <b>Premium Subscriptions</b> at affordable prices.</p>  
+</div>  
+  
+<div class="item-box project-box" style="margin-bottom: 20px;" onclick="openModal('fa-palette', 'Graphic Design Excellence', 'Successfully completed over <b>1500+ designs</b> for <b>300+ satisfied customers</b> since 2022. Specialized in modern branding and UI elements.', '')">  
+    <div class="project-box-header">
+        <h3><i class="fas fa-palette"></i> Graphic Design Excellence</h3>
+        <div class="click-icon-wrapper"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top: 5px;">Successfully completed over <b>1500+ designs</b> for <b>300+ satisfied customers</b> since 2022.</p>  
+</div>  
+  
+<div class="item-box project-box" style="margin-bottom: 20px;" onclick="openModal('fa-globe', 'Portfolio Website', 'A premium, responsive portfolio built with HTML & CSS. Designed to showcase my projects and skills with a modern dark theme.', '')">  
+    <div class="project-box-header">
+        <h3><i class="fas fa-globe"></i> Portfolio Website</h3>
+        <div class="click-icon-wrapper"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top: 5px;">A premium, responsive portfolio built with HTML & CSS.</p>  
+</div>  
+  
+<div class="item-box project-box" onclick="openModal('fa-user-shield', 'Cyber Lab Practice', 'A dedicated environment for practicing network security and ethical hacking. Exploring vulnerabilities and testing security measures.', '')">  
+    <div class="project-box-header">
+        <h3><i class="fas fa-user-shield"></i> Cyber Lab Practice</h3>
+        <div class="click-icon-wrapper"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top: 5px;">A dedicated environment for practicing network security and ethical hacking.</p>  
+</div>
+
+  </div>    
+  
+      <div class="card reveal" id="achievements">  
+    <h2>Achievements</h2>  
+
+    <div class="item-box project-box" style="margin-bottom: 20px; border-color: rgba(34, 197, 94, 0.4); background: rgba(34, 197, 94, 0.05);" onclick="openModal('fa-map-marked-alt', 'Google Maps Local Guide', 'Active community contributor with over <b>1.3 Million+ views</b> on my uploaded photos and reviews. Helping thousands of people globally with visual digital contributions.', '')">  
+    <div class="project-box-header">
+        <h3><i class="fas fa-map-marked-alt" style="color: var(--success);"></i> Google Maps Contributor</h3>
+        <div class="click-icon-wrapper"><i class="fas fa-chevron-right"></i></div>
+    </div>
+    <p style="font-size:0.9rem; color:var(--text-dim); margin-top: 5px;">Achieved a massive milestone of <b>1.3M+ views</b> on my photo contributions and reviews.</p>  
+</div>
+
+  </div>  
+
+  <div class="card reveal" id="gallery">
+      <h2>Gallery Showcase</h2>
+      <div class="carousel-wrapper" id="gallery-carousel">
+          <div class="carousel-track">
+              <div class="carousel-slide">
+                  <div class="gallery-item">
+                      <img src="travel.jpg" alt="My Travel Diary">
+                      <div class="gallery-caption">Travel & Exploration</div>
+                  </div>
+              </div>
+              <div class="carousel-slide">
+                  <div class="gallery-item">
+                      <img src="img3.jpg" alt="Train Photography">
+                      <div class="gallery-caption">Train Photography</div>
+                  </div>
+              </div>
+              <div class="carousel-slide">
+                  <div class="gallery-item">
+                      <img src="img1.jpg" alt="Logo Design">
+                      <div class="gallery-caption">Logo & Branding</div>
+                  </div>
+              </div>
+              <div class="carousel-slide">
+                  <div class="gallery-item">
+                      <img src="img2.jpg" alt="Graphic Design">
+                      <div class="gallery-caption">Graphic Design</div>
+                  </div>
+              </div>
+           </div>
+      </div>
+      <div class="carousel-dots" id="gallery-dots"></div>
+  </div>
+
+  <div class="card reveal" id="testimonials">
+      <h2>Client Feedback</h2>
+      <div class="carousel-wrapper" id="testimonial-carousel">
+          <div class="carousel-track">
+              <div class="carousel-slide">
+                  <div class="testimonial-box">
+                      <div class="stars">
+                          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                      <p class="testimonial-text">"Mahim provided an exceptional logo design for our business. The delivery was fast, and the communication was top-notch. Highly recommended!"</p>
+                      <div class="client-info">- Anonymous Client</div>
+                  </div>
+              </div>
+              <div class="carousel-slide">
+                  <div class="testimonial-box">
+                      <div class="stars">
+                          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                      </div>
+                      <p class="testimonial-text">"Got my premium subscription from Pro Members Zone without any hassle. Very reliable service and polite behavior. Will definitely purchase again."</p>
+                      <div class="client-info">- Verified Customer</div>
+                  </div>
+              </div>
+              <div class="carousel-slide">
+                  <div class="testimonial-box">
+                      <div class="stars">
+                          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                      </div>
+                      <p class="testimonial-text">"Excellent graphic design for our community event. Mahim understood exactly what we needed and delivered an outstanding design."</p>
+                      <div class="client-info">- Community Admin</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="carousel-dots" id="testimonial-dots"></div>
+  </div>
+  
+  <div class="card reveal" id="contact-form-section">  
+    <h2>Get In Touch</h2>  
+    <p class="section-desc">Have a project in mind? Send me a message today!</p>
+    
+    <form id="contact-form" action="https://formsubmit.co/contact@mahim.bro.bd" method="POST">  
+      <div id="form-inputs">
+        <div class="input-group">
+            <input type="text" name="name" id="fname" placeholder=" " required>
+            <label for="fname">Full Name</label>
+        </div>
+        <div class="input-group">
+            <input type="email" name="email" id="femail" placeholder=" " required>
+            <label for="femail">Email Address</label>
+        </div>
+        <div class="input-group">
+            <textarea name="message" id="fmsg" rows="3" placeholder=" " required></textarea>
+            <label for="fmsg">Your Message</label>
+        </div>
+
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New Portfolio Message">
+        <input type="hidden" name="_ajax" value="true">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">  
+      </div>
+      
+      <div id="success-message" style="display:none; text-align:center; padding: 30px 10px; margin-bottom: 15px;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 65px; height: 65px; border-radius: 50%; background: rgba(34, 197, 94, 0.1); color: var(--success); font-size: 30px; margin-bottom: 15px;">
+          <i class="fas fa-check"></i>
+        </div>
+        <h3 style="color: var(--success); font-size: 1.4rem; font-weight: 600; margin-bottom: 8px;">Message Delivered!</h3>
+        <p style="color: var(--text-dim); font-size: 0.95rem;">Thank you for reaching out. I'll get back to you soon.</p>
+      </div>
+
+      <button type="submit" id="submit-btn">Send Message &nbsp; <i class="fas fa-paper-plane"></i></button>
+    </form>  
+    <p id="msg-status" style="text-align:center; margin-top:15px; font-weight: 500;"></p>  
+  </div>    
+  
+  <div class="card reveal" id="contact">  
+    <h2>Contact Details</h2>  
+    <p class="section-desc">Always open to new opportunities. Let's talk!</p>
+    
+    <div class="contact-item">  
+        <i class="fas fa-envelope main-icon" style="color:var(--accent); font-size: 1.2rem; width: 25px; text-align: center;"></i>   
+        <a href="mailto:contact@mahim.bro.bd"> contact@mahim.bro.bd</a>  
+    </div>  
+    <div class="contact-item">  
+        <i class="fab fa-whatsapp main-icon" style="color:var(--success); font-size: 1.2rem; width: 25px; text-align: center;"></i>   
+        <a href="https://wa.me/8801404950747?text=Hello%20Mahim%2C%20I%20visited%20your%20portfolio" target="_blank"> +8801404950747</a>  
+    </div>  
+    <div class="contact-item">  
+        <i class="fab fa-facebook main-icon" style="color:#1877F2; font-size: 1.2rem; width: 25px; text-align: center;"></i>   
+        <a href="https://www.facebook.com/share/19hVQfbCEq/" target="_blank"> Md Mahim</a>  
+    </div>  
+  </div>    
+  <div class="footer">  
+    &copy; <b>Md Mahim</b>. Crafted with <i class="fas fa-heart" style="color: #e11d48;"></i>  
+  </div>  
+</div>  
+  
+  <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <i class="fas fa-times close-modal" onclick="closeModal(event, true)"></i>
+      <i id="modal-icon" class="fas modal-icon"></i>
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+      <a href="#" id="modal-link" target="_blank" class="modal-btn" style="display:none;">View Live Project &nbsp;<i class="fas fa-external-link-alt" style="font-size: 0.9rem;"></i></a>
+    </div>
+  </div>
+
+  <button id="scrollTopBtn" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+<script src="script.js"></script>
+
+</body>  
+</html>
