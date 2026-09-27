@@ -106,10 +106,11 @@ body::before {
   }
 }
   
-/* --- TOP ACTION BUTTONS (MENU & THEME) PERFECTLY ALIGNED --- */
-.menu-btn, .theme-toggle {
+/* --- TOP ACTION BUTTON (MENU) --- */
+.menu-btn {
   position: absolute;
   top: 25px;
+  left: 25px;
   width: 45px;
   height: 45px;
   display: flex;
@@ -125,17 +126,14 @@ body::before {
   font-size: 20px;
 }
 
-.menu-btn { left: 25px; }
-.theme-toggle { right: 25px; }
-
 @media (hover: hover) {
-  .menu-btn:hover, .theme-toggle:hover {  
+  .menu-btn:hover {  
     background: var(--accent);  
     color: #000;  
   }
 }
 
-.menu-btn:active, .theme-toggle:active {
+.menu-btn:active {
   background: var(--accent);  
   color: #000;
   transform: scale(0.95);
@@ -793,15 +791,13 @@ button:hover{
     #scrollTopBtn { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1rem;}
     
     /* Perfect alignment for mobile */
-    .menu-btn, .theme-toggle { top: 15px; width: 40px; height: 40px; font-size: 18px; }
-    .menu-btn { left: 15px; }
-    .theme-toggle { right: 15px; }
+    .menu-btn { top: 15px; left: 15px; width: 40px; height: 40px; font-size: 18px; }
 }  
   
 /* --- PRINT / CV OPTIMIZATION --- */  
 @media print {  
   @page { size: A4; margin: 8mm; }  
-  body::before, .menu-btn, .side-menu, .menu-overlay-bg, #contact-form-section, .icons, button, .footer, #particles-js, .cursor-follower, #scrollTopBtn, .btn-cta, .carousel-dots, .theme-toggle, .section-desc { display: none !important; }  
+  body::before, .menu-btn, .side-menu, .menu-overlay-bg, #contact-form-section, .icons, button, .footer, #particles-js, .cursor-follower, #scrollTopBtn, .btn-cta, .carousel-dots, .section-desc { display: none !important; }  
   body { background: #fff !important; color: #000 !important; line-height: 1.2 !important; overflow: visible !important; }  
   .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }  
   .header { border-bottom: 2px solid #0284c7 !important; margin-bottom: 8px !important; padding: 5px 0 !important; text-align: left !important; overflow: hidden !important; }  
@@ -825,127 +821,4 @@ button:hover{
   .testimonial-box { background: transparent !important; border: 1px solid #ccc !important; }
   .testimonial-text { color: #000 !important;}
   .client-info { color: #0284c7 !important;}
-}  
-  
-/* --- PERFECT GLASSMORPHISM FOR LIGHT MODE --- */
-body.light-mode {
-  color-scheme: light;
-  --bg-dark: #f0f4f8; 
-  --card-bg: rgba(255, 255, 255, 0.15); 
-  --text-main: #0f172a;
-  --text-dim: #475569;
-}
-
-body.light-mode::before {
-  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-}
-
-/* FIX: Light Mode Performance Issue (Removed drop-shadow) */
-body.light-mode #particles-js {
-  filter: brightness(0.5) contrast(1.2);
-  opacity: 0.5; 
-  /* অ্যানিমেশন স্মুথ করার জন্য হার্ডওয়্যার অ্যাকসিলারেশন */
-  transform: translateZ(0); 
-  will-change: transform;
-}
-
-body.light-mode .card {
-  background: rgba(255, 255, 255, 0.25); 
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-  backdrop-filter: blur(6px); 
-  -webkit-backdrop-filter: blur(6px);
-}
-
-body.light-mode .card:hover {
-  box-shadow: 0 12px 40px rgba(56, 189, 248, 0.15);
-  border-color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.35);
-}
-
-body.light-mode .item-box, 
-body.light-mode .testimonial-box {
-  background: rgba(255, 255, 255, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-}
-
-body.light-mode .gallery-item {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-body.light-mode .input-group input, 
-body.light-mode .input-group textarea {
-  background: rgba(255, 255, 255, 0.4);
-  color: #0f172a;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
-}
-
-body.light-mode .side-menu {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%); 
-  border-right: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 5px 0 30px rgba(31, 38, 135, 0.1);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-}
-
-body.light-mode .menu-profile {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
-}
-body.light-mode .menu-footer {
-  border-top: 1px solid rgba(15, 23, 42, 0.1);
-}
-
-body.light-mode .menu-overlay-bg {
-  background: rgba(15, 23, 42, 0.15);
-}
-
-body.light-mode .progress-bar {
-  background: rgba(0, 0, 0, 0.08);
-}
-
-body.light-mode .dot {
-  background: rgba(0, 0, 0, 0.25);
-}
-body.light-mode .dot.active {
-  background: rgba(0, 0, 0, 0.85);
-}
-
-body.light-mode .contact-item a {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.2);
-}
-
-body.light-mode .menu-btn, 
-body.light-mode .theme-toggle {
-  background: rgba(255, 255, 255, 0.25); 
-  backdrop-filter: blur(16px); 
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(56, 189, 248, 0.4); 
-}
-
-/* FIX: লাইট মুডে মোডাল/পপআপ এর গ্লাস ডিজাইন */
-body.light-mode .modal-overlay {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-body.light-mode .modal-content {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.5);
-  box-shadow: 0 15px 40px rgba(31, 38, 135, 0.1);
-}
-body.light-mode .close-modal {
-  color: #475569;
-}
-body.light-mode .close-modal:hover {
-  color: #f43f5e;
-}
-
-/* FIX: লাইট মুডে গ্যালারি ক্যাপশনের টেক্সট পড়ার জন্য গ্লাস ইফেক্ট */
-body.light-mode .gallery-caption {
-    background: rgba(255, 255, 255, 0.85);
-    color: #0f172a;
-    border-top: 1px solid rgba(255, 255, 255, 0.8);
 }

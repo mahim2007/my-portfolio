@@ -14,26 +14,6 @@ function typing(){
 }  
 window.onload = typing;  
 
-// --- Theme Toggle & System Preference Logic ---
-function applyTheme(isLight) {
-    const body = document.body;
-    const icon = document.getElementById('theme-icon');
-    if (isLight) {
-        body.classList.add('light-mode');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    } else {
-        body.classList.remove('light-mode');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    }
-}
-
-function toggleTheme() {
-    const isLight = !document.body.classList.contains('light-mode');
-    applyTheme(isLight);
-}
-
 // Menu Toggle Function
 function toggleMenu(){  
   let menu = document.getElementById("menu");  
@@ -305,17 +285,7 @@ function initSkillsCarousel() {
     setTimeout(reveal, 100);
 }
 
-// FIX: DOMContentLoaded এর ভেতরে সিস্টেম থিম চেকার লজিক যুক্ত করা হলো
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Detect System Preference
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)');
-    applyTheme(systemPrefersLight.matches);
-    
-    // 2. Listen for System Theme Changes
-    systemPrefersLight.addEventListener('change', (e) => {
-        applyTheme(e.matches);
-    });
-
     initSkillsCarousel(); 
     setupInfiniteCarousel('skills-carousel', 'skills-dots'); 
     setupInfiniteCarousel('gallery-carousel', 'gallery-dots');
@@ -345,7 +315,7 @@ function animateCursor() {
 }
 animateCursor();
 
-const hoverItems = document.querySelectorAll('a, button, .menu-btn, .project-box, .contact-item a, .theme-toggle');
+const hoverItems = document.querySelectorAll('a, button, .menu-btn, .project-box, .contact-item a');
 hoverItems.forEach(item => {
   item.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
   item.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
