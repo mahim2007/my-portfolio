@@ -66,46 +66,57 @@ document.addEventListener('touchend', e => {
   }
 }, {passive: true});
 
-// Scroll Reveal, Skill Progress & Scroll To Top Button Logic
-const scrollTopBtn = document.getElementById('scrollTopBtn');
+// Highly Optimized Intersection Observer for Reveal & Skill Bars
+let revealObserver = null;
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          const progressBars = entry.target.querySelectorAll('.progress');
+          if (progressBars.length > 0) {
+            progressBars.forEach(bar => {
+              const width = bar.getAttribute('data-width');
+              if (width) bar.style.width = width;
+            });
+          }
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
 
-function reveal() {
-  var reveals = document.querySelectorAll(".reveal");
-  var windowHeight = window.innerHeight;
-  var bottomScrollPosition = window.innerHeight + window.scrollY;
-  var documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-
-  for (var k = 0; k < reveals.length; k++) {
-    var elementTop = reveals[k].getBoundingClientRect().top;
-    var elementVisible = 50; 
-    if (elementTop < windowHeight - elementVisible) {
-      reveals[k].classList.add("active");
-    }
-  }
-
-  var skillsSection = document.getElementById("skills");
-  if(skillsSection) {
-      var skillTop = skillsSection.getBoundingClientRect().top;
-      if (skillTop < windowHeight - 100) {
-          var progressBars = document.querySelectorAll('.progress');
-          progressBars.forEach(bar => {
-              bar.style.width = bar.getAttribute('data-width');
-          });
-      }
-  }
-
-  if (bottomScrollPosition >= documentHeight - 150) {
-    scrollTopBtn.classList.add('show');
+    reveals.forEach(el => revealObserver.observe(el));
   } else {
-    scrollTopBtn.classList.remove('show');
+    reveals.forEach(el => el.classList.add('active'));
+    document.querySelectorAll('.progress').forEach(bar => {
+      bar.style.width = bar.getAttribute('data-width');
+    });
   }
 }
-window.addEventListener("scroll", reveal);
-reveal(); 
+
+// Lightweight Scroll To Top with requestAnimationFrame throttle
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+let isScrollTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (!isScrollTicking) {
+    window.requestAnimationFrame(() => {
+      if (window.scrollY > 400) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+      isScrollTicking = false;
+    });
+    isScrollTicking = true;
+  }
+}, { passive: true });
 
 function scrollToTop() {
   window.scrollTo({top: 0, behavior: 'smooth'});
-  document.getElementById('scrollTopBtn').blur(); 
+  if (scrollTopBtn) scrollTopBtn.blur(); 
 }
 
 // --- CLICK TO TOGGLE GALLERY CAPTION LOGIC ---
@@ -129,6 +140,18 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// --- Page Scroll State Tracker ---
+let isWindowScrolling = false;
+let windowScrollTimer = null;
+
+window.addEventListener('scroll', () => {
+    isWindowScrolling = true;
+    clearTimeout(windowScrollTimer);
+    windowScrollTimer = setTimeout(() => {
+        isWindowScrolling = false;
+    }, 150);
+}, { passive: true });
+
 // --- BULLETPROOF BUG FIX: Infinite Swipe Carousel ---
 function setupInfiniteCarousel(carouselId, dotsId) {
     const wrapper = document.getElementById(carouselId);
@@ -141,7 +164,9 @@ function setupInfiniteCarousel(carouselId, dotsId) {
 
     let currentIndex = 1; 
     let startX = 0;
+    let startY = 0;
     let isDragging = false;
+    let isVerticalScroll = null;
     let currentTranslate = 0;
     let prevTranslate = 0;
     let slideWidth = wrapper.clientWidth; 
@@ -207,10 +232,25 @@ function setupInfiniteCarousel(carouselId, dotsId) {
         fixClonePosition();
         updateDots();
     });
+
+    // Window scroll event listener to immediately cancel any slide motion during scroll
+    window.addEventListener('scroll', () => {
+        if (isDragging) {
+            isDragging = false;
+            isVerticalScroll = true;
+            setPositionByIndex(true);
+        }
+    }, { passive: true });
     
     function touchStart(event) {
+        // স্ক্রোল করার সময় স্লাইড ড্র্যাগ করা বন্ধ থাকবে
+        if (isWindowScrolling) return;
+
         isDragging = true;
-        startX = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        isVerticalScroll = null;
+        const isTouch = !event.type.includes('mouse');
+        startX = isTouch ? event.touches[0].clientX : event.pageX;
+        startY = isTouch ? event.touches[0].clientY : event.pageY;
         
         fixClonePosition();
         
@@ -221,11 +261,36 @@ function setupInfiniteCarousel(carouselId, dotsId) {
     
     function touchMove(event) {
         if (!isDragging) return;
-        const currentPosition = event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-        const diff = currentPosition - startX;
-        track.style.transform = `translateX(${prevTranslate + diff}px)`;
+
+        const isTouch = !event.type.includes('mouse');
+        const currentX = isTouch ? event.touches[0].clientX : event.pageX;
+        const currentY = isTouch ? event.touches[0].clientY : event.pageY;
+        const diffX = currentX - startX;
+        const diffY = currentY - startY;
+
+        // ডিটেকশন: ইউজার কি পেইজ স্ক্রোল করছেন নাকি স্লাইড সরাচ্ছেন?
+        if (isVerticalScroll === null && isTouch) {
+            if (Math.abs(diffX) < 7 && Math.abs(diffY) < 7) {
+                return; // খুব সামান্য মুভমেন্টে কোনো সিদ্ধান্ত নয়
+            }
+            if (Math.abs(diffY) >= Math.abs(diffX)) {
+                // ইউজার উল্লম্বভাবে পেইজ স্ক্রোল করছেন - স্লাইড বন্ধ থাকবে!
+                isVerticalScroll = true;
+                isDragging = false;
+                setPositionByIndex(true);
+                return;
+            } else {
+                isVerticalScroll = false;
+            }
+        }
+
+        if (isVerticalScroll === true) {
+            return;
+        }
+
+        track.style.transform = `translateX(${prevTranslate + diffX}px)`;
         
-        if (Math.abs(diff) > 10 && carouselId === 'gallery-carousel') {
+        if (Math.abs(diffX) > 10 && carouselId === 'gallery-carousel') {
             const items = wrapper.querySelectorAll('.gallery-item');
             items.forEach(item => item.classList.remove('active-caption'));
         }
@@ -234,11 +299,18 @@ function setupInfiniteCarousel(carouselId, dotsId) {
     function touchEnd(event) {
         if (!isDragging) return;
         isDragging = false;
-        const endX = event.type.includes('mouse') ? event.pageX : event.changedTouches[0].clientX;
+
+        if (isVerticalScroll === true) {
+            setPositionByIndex(true);
+            return;
+        }
+
+        const isTouch = !event.type.includes('mouse');
+        const endX = isTouch ? (event.changedTouches ? event.changedTouches[0].clientX : startX) : event.pageX;
         const diff = endX - startX;
         
-        if (diff < -40) currentIndex++; 
-        else if (diff > 40) currentIndex--; 
+        if (diff < -50) currentIndex++; 
+        else if (diff > 50) currentIndex--; 
         
         if (currentIndex < 0) currentIndex = 0;
         if (currentIndex >= allSlides.length) currentIndex = allSlides.length - 1;
@@ -281,8 +353,6 @@ function initSkillsCarousel() {
     carouselContainer.innerHTML = trackHtml;
     
     rawSkills.remove();
-    
-    setTimeout(reveal, 100);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -290,36 +360,55 @@ document.addEventListener("DOMContentLoaded", () => {
     setupInfiniteCarousel('skills-carousel', 'skills-dots'); 
     setupInfiniteCarousel('gallery-carousel', 'gallery-dots');
     setupInfiniteCarousel('testimonial-carousel', 'testimonial-dots');
+    initScrollReveal();
 });
 
-// Custom Cursor Logic
+// Custom Cursor Logic (Only active on desktop / fine pointer devices)
 const cursor = document.getElementById('cursor');
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-let cursorX = mouseX;
-let cursorY = mouseY;
+const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+if (hasFinePointer && cursor) {
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let isCursorAnimating = false;
 
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.15;
-  cursorY += (mouseY - cursorY) * 0.15;
-  
-  cursor.style.left = cursorX + 'px';
-  cursor.style.top = cursorY + 'px';
-  
-  requestAnimationFrame(animateCursor);
+  function renderCursor() {
+    cursorX += (mouseX - cursorX) * 0.22;
+    cursorY += (mouseY - cursorY) * 0.22;
+    
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+    
+    if (Math.abs(mouseX - cursorX) > 0.15 || Math.abs(mouseY - cursorY) > 0.15) {
+      requestAnimationFrame(renderCursor);
+    } else {
+      isCursorAnimating = false;
+    }
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isCursorAnimating) {
+      isCursorAnimating = true;
+      requestAnimationFrame(renderCursor);
+    }
+  }, { passive: true });
+
+  // Event delegation for smooth hover feedback without hundreds of listeners
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, .menu-btn, .project-box, .contact-item a, .gallery-item, .dot')) {
+      document.body.classList.add('cursor-hover');
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('a, button, .menu-btn, .project-box, .contact-item a, .gallery-item, .dot')) {
+      document.body.classList.remove('cursor-hover');
+    }
+  }, { passive: true });
 }
-animateCursor();
-
-const hoverItems = document.querySelectorAll('a, button, .menu-btn, .project-box, .contact-item a');
-hoverItems.forEach(item => {
-  item.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  item.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
 
 // Modal Logic
 function openModal(iconClass, title, desc, link) {
@@ -422,28 +511,28 @@ form.addEventListener("submit", function(e){
   });
 });
 
-// Particles.js Initialization 
+// High-Performance Particles.js (Non-blocking, Lightweight, 60+ FPS)
+const isSmallDevice = window.innerWidth < 768;
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 70, "density": { "enable": true, "value_area": 800 } },
+    "number": { "value": isSmallDevice ? 24 : 42, "density": { "enable": true, "value_area": 1000 } },
     "color": { "value": "#38bdf8" },
     "shape": { "type": "circle" },
-    "opacity": { "value": 0.6, "random": false },
-    "size": { "value": 3, "random": true },
-    "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.35, "width": 1.2 },
-    "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+    "opacity": { "value": 0.45, "random": false },
+    "size": { "value": 2.5, "random": true },
+    "line_linked": { "enable": true, "distance": 125, "color": "#38bdf8", "opacity": 0.22, "width": 1 },
+    "move": { "enable": true, "speed": 1.2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
   },
   "interactivity": {
-    "detect_on": "canvas",
+    "detect_on": "window",
     "events": {
-      "onhover": { "enable": true, "mode": "grab" },
-      "onclick": { "enable": true, "mode": "push" },
+      "onhover": { "enable": !isSmallDevice, "mode": "grab" },
+      "onclick": { "enable": false },
       "resize": true
     },
     "modes": {
-      "grab": { "distance": 150, "line_linked": { "opacity": 0.5 } },
-      "push": { "particles_nb": 3 }
+      "grab": { "distance": 120, "line_linked": { "opacity": 0.35 } }
     }
   },
-  "retina_detect": true
+  "retina_detect": false
 });

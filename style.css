@@ -82,6 +82,8 @@ body::before {
   top: 0;
   left: 0;
   z-index: -1;
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .cursor-follower {
@@ -92,10 +94,10 @@ body::before {
   border: 1px solid rgba(56, 189, 248, 0.5);
   border-radius: 50%;
   pointer-events: none;
-  transform: translate(-50%, -50%);
   transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
   z-index: 9999;
   display: none; 
+  will-change: transform;
 }
 @media (hover: hover) and (pointer: fine) {
   .cursor-follower { display: block; }
@@ -274,7 +276,9 @@ body::before {
   box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);  
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;  
   animation: morphing 5s ease-in-out infinite alternate;  
-  transition: all 0.5s ease-in-out;  
+  transition: transform 0.4s ease;  
+  transform: translateZ(0);
+  will-change: border-radius;
 }  
   
 .profile-img:hover {  
@@ -342,35 +346,35 @@ h1{
 }
   
 .card{  
-  background: rgba(15, 23, 42, 0.6);  
-  border: 1px solid rgba(255, 255, 255, 0.1);  
+  background: rgba(15, 23, 42, 0.75);  
+  border: 1px solid rgba(255, 255, 255, 0.08);  
   padding:35px;  
   margin:30px 0;  
   border-radius:20px;  
-  backdrop-filter: blur(12px);  
-  -webkit-backdrop-filter: blur(12px); 
-  transition: 0.4s ease; 
-  
-  /* FIX: Mobile Glitch White Overlay Fix */
+  backdrop-filter: blur(8px);  
+  -webkit-backdrop-filter: blur(8px); 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform: translateZ(0);
 }  
   
 .card:hover {  
     border-color: rgba(56, 189, 248, 0.4);  
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);  
+    box-shadow: 0 10px 30px rgba(0,0,0,0.45);  
 }  
 
-/* FIX: Scroll Animation Rendering Glitch Fix */
+/* Fast, smooth hardware-accelerated reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s ease-in-out; 
+  transform: translateY(25px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
   will-change: transform, opacity; 
 }
 .reveal.active {
   opacity: 1;
-  transform: translateY(0) translateZ(0); 
+  transform: translateY(0); 
 }
   
 .card h2{  
